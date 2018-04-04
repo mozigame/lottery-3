@@ -1,0 +1,97 @@
+spring:
+  datasource:
+      url: jdbc:mysql://localhost:3306/db_lottery?useUnicode=true&characterEncoding=utf8
+      driverClassName: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      username: root
+      password: root
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      #初始化连接数量，最大最小连接数
+      initialSize: 5
+      maxActive: 10
+      minIdle: 3
+      #获取连接等待超时的时间
+      maxWait: 600000
+      #超过时间限制是否回收
+      removeAbandoned: true
+      #超过时间限制多长
+      removeAbandonedTimeout: 180
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 600000
+      #配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      #用来检测连接是否有效的sql，要求是一个查询语句
+      validationQuery: SELECT 1 FROM DUAL
+      #申请连接的时候检测
+      testWhileIdle: true
+      #申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能
+      testOnBorrow: false
+      #归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能
+      testOnReturn: false
+      #打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
+      #监控统计用的filter:stat 日志用的filter:log4j 防御SQL注入的filter:wall
+      filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+
+  redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+      timeout: 0
+  zipkin:
+      enabled: true
+  sleuth:
+      sampler:
+          percentage: 1
+mybatis:
+  basepackage: com.github.chengbin.admin.mapper
+  type-aliases-package: com.github.chengbin.admin.entity
+  mapper-locations: classpath:mapper/**/*.xml
+
+
+gate:
+    client:
+        authHeader: access-token
+        authHost: http://localhost:8090/api/authen
+        tokenHead: ApiGateToken
+    ignore:
+        startWith: /admin,/index,/about
+        contain: .
+    api:
+        header: access-token  #http 请求头key
+        secret: mySecret   #jwt 加密密钥
+        expiration: 7200  # 过期秒数
+        tokenHead: ApiGateToken # 认证token前缀
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    gate-demo-provider:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+zuul:
+  prefix: /api

@@ -1,0 +1,79 @@
+spring:
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+      default-property-inclusion: non_null
+      serialization:
+        INDENT_OUTPUT: true
+
+  thymeleaf:
+    cache: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/shiro?useUnicode=true&characterEncoding=utf8
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    #初始化连接数量，最大最小连接数
+    initialSize: 5
+    maxActive: 10
+    minIdle: 3
+    #获取连接等待超时的时间
+    maxWait: 600000
+    #超过时间限制是否回收
+    removeAbandoned: true
+    #超过时间限制多长
+    removeAbandonedTimeout: 180
+    #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 600000
+    #配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    #用来检测连接是否有效的sql，要求是一个查询语句
+    validationQuery: SELECT 1 FROM DUAL
+    #申请连接的时候检测
+    testWhileIdle: true
+    #申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能
+    testOnBorrow: false
+    #归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能
+    testOnReturn: false
+    #打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 50
+    #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
+    #监控统计用的filter:stat 日志用的filter:log4j 防御SQL注入的filter:wall
+    filters: stat,wall,slf4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+  zipkin:
+    enabled: true
+  sleuth:
+      sampler:
+          percentage: 1
+
+
+mybatis:
+  type-aliases-package: com.github.chengbin.auth.entity
+  mapper-locations: classpath:mapper/**/*.xml
+
+
+# JWT(由三部分组成 ：header.payload.signature
+# 1.定义jwt采用的前面算法 2.数据声明Claim，可以申明用户名、创建时间和过期时间 3.签名)
+# 请求头中添加token： set..("Authorization","Bearer xxxxxxxxx")
+jwt:
+  header: Authorization     #请求头header key名称
+  secret: mySecret          #jwt 加密密钥
+  expiration: 604800        # 过期秒数
+  tokenHead: "Bearer "      # 认证token前缀
+  route:
+    authentication:
+      path: token
+      refresh: refresh
+      register: register

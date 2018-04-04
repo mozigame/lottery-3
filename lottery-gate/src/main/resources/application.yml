@@ -1,0 +1,71 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@peer1:8081/eureka,http://root:123456@peer2:8082/eureka,http://root:123456@peer3:8083/eureka
+
+##timeout config
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000
+zuul:
+  #限流
+  ratlimit:
+    key-prefix: order-ratelimite
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    policies:
+      lottery-order:
+        limit: 2
+        quota: 1
+        refresh-interval: 3
+  host:
+    max-per-route-connections: 2000
+    max-total-connections: 20000
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+  semaphore:
+    max-semaphores: 1000
+  sensitive-headers:
+  ignored-services: "*"
+  prefix: /api
+  strip-prefix: true   #只对zuul.preFix有用,转发请求之前去掉所有的前缀,如:/auth/zhangsan转发之后请求为/zhangsan
+  routes:
+    order:
+      path: /order/**
+      serviceId: lottery-order
+    auth:
+      path: /auth/**
+      serviceId: lottery-auth
+
+jwt:
+  header: Authorization     #请求头header key名称
+  secret: mySecret          #jwt 加密密钥
+  expiration: 604800        # 过期秒数
+  tokenHead: "Bearer "      # 认证token前缀
+  route:
+    authentication:
+      path: token
+      refresh: refresh
+      register: register
+
+gate:
+  ignore:
+    startWith: /static,/auth
+
+#Spring Cloud Netflix 使用 Netflix Ribbon 来实现客户端的负载均衡。
+#默认情况下，Ribbon 将会使用 Netflix Eureka 作为服务发现。对于一个
+#简单的例子来说，我们跳过了服务发现应用，所以我们设置ribbon.eureka.enabled为false。
+#这样，Ribbon 不会使用Eureka来查找服务，我们必须为 Book 服务指定url
+#zuul.routes.books.url=http://localhost:8090
+#ribbon.eureka.enabled=false
+

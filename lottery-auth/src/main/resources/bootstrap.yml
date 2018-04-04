@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: lottery-auth
+  cloud:
+    config:
+      profile: dev
+      label: master
+      username: root
+      password: 123456
+      discovery:
+        enabled: true     # 默认false，设为true表示使用注册中心中的configserver配置而不自己配置configserver的uri
+        service-id: lottery-config  # 指定config server在服务发现中的serviceId，默认为：configserver
+    bus:
+      trace:
+        enabled: true    #开启消息跟踪
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:127.0.0.1}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: guest
+    password: guest
+
+management:
+  security:
+    enabled: false
+
+server:
+  port: 8091
+  undertow:
+     worker-threads: 20
+     buffer-size: 512
+     io-threads: 2
+  compression:
+    enabled: true
+    #mime-types: text/xml,text/css,text/plain,application/xml,application/json,application/javascript
+    min-response-size: 1024
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@peer1:8081/eureka,http://root:123456@peer2:8082/eureka,http://root:123456@peer3:8083/eureka
+
+## LOGGING
+logging:
+  path: F://log
+  config: classpath:config/logback.xml
+  level:
+    application: INFO
+    com.netflix: WARN
+    druid.sql: WARN
+    com.github.chengbin: INFO
+    org.apache.http: WARN
+    org.hibernate: WARN
+    org.springframework: WARN
+    org.springframework.boot: WARN
+    org.thymeleaf: WARN
+
+
+
+
+

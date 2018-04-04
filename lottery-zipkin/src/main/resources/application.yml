@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: lottery-zipkin
+  rabbitmq:
+      host: ${RABBIT_MQ_HOST:127.0.0.1}
+      port: ${RABBIT_MQ_PORT:5672}
+      username: guest
+      password: guest
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/db_zipkin?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    initialize: true
+    continue-on-error: true
+  #zipkin数据保存到数据库中需要进行如下配置
+  #表示当前程序不使用sleuth
+  sleuth:
+    enabled: false
+   #表示zipkin数据存储方式是mysql
+zipkin:
+  storage:
+    type: mysql
+sleuth:
+  sampler:
+    percentage: 1
+
+server:
+  port: 8093
+  undertow:
+     worker-threads: 20
+     buffer-size: 512
+     io-threads: 2
+  compression:
+    enabled: true
+    mime-types: text/xml,text/css,text/plain,application/xml,application/json,application/javascript
+    min-response-size: 1024
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@peer1:8081/eureka,http://root:123456@peer2:8082/eureka,http://root:123456@peer3:8083/eureka
+
+
+#elasticsearch config
+#zipkin.storage.type=elasticsearch
+#zipkin.storage.elasticsearch.hosts=127.0.0.1:9200
+#zipkin.storage.elasticsearch.cluster=elasticsearch
+#zipkin.storage.elasticsearch.index=zipkin
+#zipkin.storage.elasticsearch.index-shards=5
+#zipkin.storage.elasticsearch.index-replicas=1
+
+#mysql config
+#zipkin.storage.type=mysql
+#spring.datasource.schema=classpath:/mysql.sql
+#spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/test
+#spring.datasource.username=root
+#spring.datasource.password=123
+#spring.datasource.initialize=true
+#spring.datasource.continueOnError=true
+#spring.sleuth.enabled=false

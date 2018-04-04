@@ -1,0 +1,53 @@
+spring:
+  profiles: peer1
+
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    register-with-eureka: true   #false:不作为一个客户端注册到注册中心
+    fetch-registry: true         #为true时，可以启动，但报异常：Cannot execute request on any known server
+    healthcheck:
+      enabled: true             # 开启健康检查（依赖spring-boot-starter-actuator）
+    service-url:
+      defaultZone: http://${security.user.name}:${security.user.password}@peer2:8082/eureka,http://${security.user.name}:${security.user.password}@peer3:8083/eureka
+
+
+---
+
+spring:
+  profiles: peer2
+
+server:
+  port: 8082
+
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    register-with-eureka: true   #false:不作为一个客户端注册到注册中心
+    fetch-registry: true         #为true时，可以启动，但报异常：Cannot execute request on any known server
+    service-url:
+      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8081/eureka,http://${security.user.name}:${security.user.password}@peer3:8083/eureka
+
+---
+spring:
+  profiles: peer3
+
+server:
+  port: 8083
+
+eureka:
+  instance:
+    hostname: peer3
+  client:
+    register-with-eureka: true   #false:不作为一个客户端注册到注册中心
+    fetch-registry: true         #为true时，可以启动，但报异常：Cannot execute request on any known server
+    service-url:
+      defaultZone: http://${security.user.name}:${security.user.password}@peer1:8081/eureka,http://${security.user.name}:${security.user.password}@peer2:8082/eureka
+
+
+

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: lottery-gate
+
+server:
+  port: 8084
+  undertow:
+     worker-threads: 20
+     buffer-size: 512
+     io-threads: 2
+  compression:
+    enabled: true
+    #mime-types: text/xml,text/css,text/plain,application/xml,application/json,application/javascript
+    min-response-size: 1024
+
+
+## LOGGING
+logging:
+  path: F://log
+  config: classpath:config/logback.xml
+  level:
+    application: INFO
+    com.netflix: WARN
+    druid.sql: WARN
+    com.github.chengbin: INFO
+    org.apache.http: WARN
+    org.hibernate: WARN
+    org.springframework: WARN
+    org.springframework.boot: WARN
+    org.thymeleaf: WARN
+
+
+
+
+

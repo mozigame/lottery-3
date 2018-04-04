@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.chengbin.crawler.mapper.FootballSpMapper" >
+  <resultMap id="BaseResultMap" type="com.github.chengbin.crawler.entity.FootballSp" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="match_id" property="matchId" jdbcType="VARCHAR" />
+    <result column="issue" property="issue" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="rate" property="rate" jdbcType="INTEGER" />
+    <result column="f01" property="f01" jdbcType="DOUBLE" />
+    <result column="f02" property="f02" jdbcType="DOUBLE" />
+    <result column="f03" property="f03" jdbcType="DOUBLE" />
+    <result column="f04" property="f04" jdbcType="DOUBLE" />
+    <result column="f05" property="f05" jdbcType="DOUBLE" />
+    <result column="f12" property="f12" jdbcType="DOUBLE" />
+    <result column="f13" property="f13" jdbcType="DOUBLE" />
+    <result column="f14" property="f14" jdbcType="DOUBLE" />
+    <result column="f15" property="f15" jdbcType="DOUBLE" />
+    <result column="f23" property="f23" jdbcType="DOUBLE" />
+    <result column="f24" property="f24" jdbcType="DOUBLE" />
+    <result column="f25" property="f25" jdbcType="DOUBLE" />
+    <result column="fother" property="fother" jdbcType="DOUBLE" />
+    <result column="p00" property="p00" jdbcType="DOUBLE" />
+    <result column="p11" property="p11" jdbcType="DOUBLE" />
+    <result column="p22" property="p22" jdbcType="DOUBLE" />
+    <result column="p33" property="p33" jdbcType="DOUBLE" />
+    <result column="pother" property="pother" jdbcType="DOUBLE" />
+    <result column="s10" property="s10" jdbcType="DOUBLE" />
+    <result column="s20" property="s20" jdbcType="DOUBLE" />
+    <result column="s30" property="s30" jdbcType="DOUBLE" />
+    <result column="s40" property="s40" jdbcType="DOUBLE" />
+    <result column="s50" property="s50" jdbcType="DOUBLE" />
+    <result column="s21" property="s21" jdbcType="DOUBLE" />
+    <result column="s31" property="s31" jdbcType="DOUBLE" />
+    <result column="s41" property="s41" jdbcType="DOUBLE" />
+    <result column="s51" property="s51" jdbcType="DOUBLE" />
+    <result column="s32" property="s32" jdbcType="DOUBLE" />
+    <result column="s42" property="s42" jdbcType="DOUBLE" />
+    <result column="s52" property="s52" jdbcType="DOUBLE" />
+    <result column="sother" property="sother" jdbcType="DOUBLE" />
+    <result column="ss" property="ss" jdbcType="DOUBLE" />
+    <result column="sp" property="sp" jdbcType="DOUBLE" />
+    <result column="sf" property="sf" jdbcType="DOUBLE" />
+    <result column="ps" property="ps" jdbcType="DOUBLE" />
+    <result column="pp" property="pp" jdbcType="DOUBLE" />
+    <result column="pf" property="pf" jdbcType="DOUBLE" />
+    <result column="fs" property="fs" jdbcType="DOUBLE" />
+    <result column="fp" property="fp" jdbcType="DOUBLE" />
+    <result column="ff" property="ff" jdbcType="DOUBLE" />
+    <result column="sheng" property="sheng" jdbcType="DOUBLE" />
+    <result column="ping" property="ping" jdbcType="DOUBLE" />
+    <result column="fu" property="fu" jdbcType="DOUBLE" />
+    <result column="rq_sheng" property="rqSheng" jdbcType="DOUBLE" />
+    <result column="rq_ping" property="rqPing" jdbcType="DOUBLE" />
+    <result column="rq_fu" property="rqFu" jdbcType="DOUBLE" />
+    <result column="t0" property="t0" jdbcType="DOUBLE" />
+    <result column="t1" property="t1" jdbcType="DOUBLE" />
+    <result column="t2" property="t2" jdbcType="DOUBLE" />
+    <result column="t3" property="t3" jdbcType="DOUBLE" />
+    <result column="t4" property="t4" jdbcType="DOUBLE" />
+    <result column="t5" property="t5" jdbcType="DOUBLE" />
+    <result column="t6" property="t6" jdbcType="DOUBLE" />
+    <result column="t7" property="t7" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, match_id, issue, number, rate,f01, f02, f03, f04, f05, f12, f13, f14, f15, f23, f24,
+    f25, fother, p00, p11, p22, p33, pother, s10, s20, s30, s40, s50, s21, s31, s41, 
+    s51, s32, s42, s52, sother, ss, sp, sf, ps, pp, pf, fs, fp, ff, sheng, ping, fu, 
+    rq_sheng, rq_ping, rq_fu, t0, t1, t2, t3, t4, t5, t6, t7, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from football_sp
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from football_sp
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.github.chengbin.crawler.entity.FootballSp" >
+    insert into football_sp (id, match_id, issue, rate,
+      number, f01, f02, f03, 
+      f04, f05, f12, f13, 
+      f14, f15, f23, f24, 
+      f25, fother, p00, p11, 
+      p22, p33, pother, s10, 
+      s20, s30, s40, s50, 
+      s21, s31, s41, s51, 
+      s32, s42, s52, sother, 
+      ss, sp, sf, ps, 
+      pp, pf, fs, fp, 
+      ff, sheng, ping, fu, 
+      rq_sheng, rq_ping, rq_fu, 
+      t0, t1, t2, t3, 
+      t4, t5, t6, t7, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{matchId,jdbcType=VARCHAR}, #{issue,jdbcType=VARCHAR}, #{rate,jdbcType=INTEGER},
+      #{number,jdbcType=VARCHAR}, #{f01,jdbcType=DOUBLE}, #{f02,jdbcType=DOUBLE}, #{f03,jdbcType=DOUBLE}, 
+      #{f04,jdbcType=DOUBLE}, #{f05,jdbcType=DOUBLE}, #{f12,jdbcType=DOUBLE}, #{f13,jdbcType=DOUBLE}, 
+      #{f14,jdbcType=DOUBLE}, #{f15,jdbcType=DOUBLE}, #{f23,jdbcType=DOUBLE}, #{f24,jdbcType=DOUBLE}, 
+      #{f25,jdbcType=DOUBLE}, #{fother,jdbcType=DOUBLE}, #{p00,jdbcType=DOUBLE}, #{p11,jdbcType=DOUBLE}, 
+      #{p22,jdbcType=DOUBLE}, #{p33,jdbcType=DOUBLE}, #{pother,jdbcType=DOUBLE}, #{s10,jdbcType=DOUBLE}, 
+      #{s20,jdbcType=DOUBLE}, #{s30,jdbcType=DOUBLE}, #{s40,jdbcType=DOUBLE}, #{s50,jdbcType=DOUBLE}, 
+      #{s21,jdbcType=DOUBLE}, #{s31,jdbcType=DOUBLE}, #{s41,jdbcType=DOUBLE}, #{s51,jdbcType=DOUBLE}, 
+      #{s32,jdbcType=DOUBLE}, #{s42,jdbcType=DOUBLE}, #{s52,jdbcType=DOUBLE}, #{sother,jdbcType=DOUBLE}, 
+      #{ss,jdbcType=DOUBLE}, #{sp,jdbcType=DOUBLE}, #{sf,jdbcType=DOUBLE}, #{ps,jdbcType=DOUBLE}, 
+      #{pp,jdbcType=DOUBLE}, #{pf,jdbcType=DOUBLE}, #{fs,jdbcType=DOUBLE}, #{fp,jdbcType=DOUBLE}, 
+      #{ff,jdbcType=DOUBLE}, #{sheng,jdbcType=DOUBLE}, #{ping,jdbcType=DOUBLE}, #{fu,jdbcType=DOUBLE}, 
+      #{rqSheng,jdbcType=DOUBLE}, #{rqPing,jdbcType=DOUBLE}, #{rqFu,jdbcType=DOUBLE}, 
+      #{t0,jdbcType=DOUBLE}, #{t1,jdbcType=DOUBLE}, #{t2,jdbcType=DOUBLE}, #{t3,jdbcType=DOUBLE}, 
+      #{t4,jdbcType=DOUBLE}, #{t5,jdbcType=DOUBLE}, #{t6,jdbcType=DOUBLE}, #{t7,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.chengbin.crawler.entity.FootballSp" >
+    insert into football_sp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="matchId != null" >
+        match_id,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="f01 != null" >
+        f01,
+      </if>
+      <if test="f02 != null" >
+        f02,
+      </if>
+      <if test="f03 != null" >
+        f03,
+      </if>
+      <if test="f04 != null" >
+        f04,
+      </if>
+      <if test="f05 != null" >
+        f05,
+      </if>
+      <if test="f12 != null" >
+        f12,
+      </if>
+      <if test="f13 != null" >
+        f13,
+      </if>
+      <if test="f14 != null" >
+        f14,
+      </if>
+      <if test="f15 != null" >
+        f15,
+      </if>
+      <if test="f23 != null" >
+        f23,
+      </if>
+      <if test="f24 != null" >
+        f24,
+      </if>
+      <if test="f25 != null" >
+        f25,
+      </if>
+      <if test="fother != null" >
+        fother,
+      </if>
+      <if test="p00 != null" >
+        p00,
+      </if>
+      <if test="p11 != null" >
+        p11,
+      </if>
+      <if test="p22 != null" >
+        p22,
+      </if>
+      <if test="p33 != null" >
+        p33,
+      </if>
+      <if test="pother != null" >
+        pother,
+      </if>
+      <if test="s10 != null" >
+        s10,
+      </if>
+      <if test="s20 != null" >
+        s20,
+      </if>
+      <if test="s30 != null" >
+        s30,
+      </if>
+      <if test="s40 != null" >
+        s40,
+      </if>
+      <if test="s50 != null" >
+        s50,
+      </if>
+      <if test="s21 != null" >
+        s21,
+      </if>
+      <if test="s31 != null" >
+        s31,
+      </if>
+      <if test="s41 != null" >
+        s41,
+      </if>
+      <if test="s51 != null" >
+        s51,
+      </if>
+      <if test="s32 != null" >
+        s32,
+      </if>
+      <if test="s42 != null" >
+        s42,
+      </if>
+      <if test="s52 != null" >
+        s52,
+      </if>
+      <if test="sother != null" >
+        sother,
+      </if>
+      <if test="ss != null" >
+        ss,
+      </if>
+      <if test="sp != null" >
+        sp,
+      </if>
+      <if test="sf != null" >
+        sf,
+      </if>
+      <if test="ps != null" >
+        ps,
+      </if>
+      <if test="pp != null" >
+        pp,
+      </if>
+      <if test="pf != null" >
+        pf,
+      </if>
+      <if test="fs != null" >
+        fs,
+      </if>
+      <if test="fp != null" >
+        fp,
+      </if>
+      <if test="ff != null" >
+        ff,
+      </if>
+      <if test="sheng != null" >
+        sheng,
+      </if>
+      <if test="ping != null" >
+        ping,
+      </if>
+      <if test="fu != null" >
+        fu,
+      </if>
+      <if test="rqSheng != null" >
+        rq_sheng,
+      </if>
+      <if test="rqPing != null" >
+        rq_ping,
+      </if>
+      <if test="rqFu != null" >
+        rq_fu,
+      </if>
+      <if test="t0 != null" >
+        t0,
+      </if>
+      <if test="t1 != null" >
+        t1,
+      </if>
+      <if test="t2 != null" >
+        t2,
+      </if>
+      <if test="t3 != null" >
+        t3,
+      </if>
+      <if test="t4 != null" >
+        t4,
+      </if>
+      <if test="t5 != null" >
+        t5,
+      </if>
+      <if test="t6 != null" >
+        t6,
+      </if>
+      <if test="t7 != null" >
+        t7,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="matchId != null" >
+        #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="f01 != null" >
+        #{f01,jdbcType=DOUBLE},
+      </if>
+      <if test="f02 != null" >
+        #{f02,jdbcType=DOUBLE},
+      </if>
+      <if test="f03 != null" >
+        #{f03,jdbcType=DOUBLE},
+      </if>
+      <if test="f04 != null" >
+        #{f04,jdbcType=DOUBLE},
+      </if>
+      <if test="f05 != null" >
+        #{f05,jdbcType=DOUBLE},
+      </if>
+      <if test="f12 != null" >
+        #{f12,jdbcType=DOUBLE},
+      </if>
+      <if test="f13 != null" >
+        #{f13,jdbcType=DOUBLE},
+      </if>
+      <if test="f14 != null" >
+        #{f14,jdbcType=DOUBLE},
+      </if>
+      <if test="f15 != null" >
+        #{f15,jdbcType=DOUBLE},
+      </if>
+      <if test="f23 != null" >
+        #{f23,jdbcType=DOUBLE},
+      </if>
+      <if test="f24 != null" >
+        #{f24,jdbcType=DOUBLE},
+      </if>
+      <if test="f25 != null" >
+        #{f25,jdbcType=DOUBLE},
+      </if>
+      <if test="fother != null" >
+        #{fother,jdbcType=DOUBLE},
+      </if>
+      <if test="p00 != null" >
+        #{p00,jdbcType=DOUBLE},
+      </if>
+      <if test="p11 != null" >
+        #{p11,jdbcType=DOUBLE},
+      </if>
+      <if test="p22 != null" >
+        #{p22,jdbcType=DOUBLE},
+      </if>
+      <if test="p33 != null" >
+        #{p33,jdbcType=DOUBLE},
+      </if>
+      <if test="pother != null" >
+        #{pother,jdbcType=DOUBLE},
+      </if>
+      <if test="s10 != null" >
+        #{s10,jdbcType=DOUBLE},
+      </if>
+      <if test="s20 != null" >
+        #{s20,jdbcType=DOUBLE},
+      </if>
+      <if test="s30 != null" >
+        #{s30,jdbcType=DOUBLE},
+      </if>
+      <if test="s40 != null" >
+        #{s40,jdbcType=DOUBLE},
+      </if>
+      <if test="s50 != null" >
+        #{s50,jdbcType=DOUBLE},
+      </if>
+      <if test="s21 != null" >
+        #{s21,jdbcType=DOUBLE},
+      </if>
+      <if test="s31 != null" >
+        #{s31,jdbcType=DOUBLE},
+      </if>
+      <if test="s41 != null" >
+        #{s41,jdbcType=DOUBLE},
+      </if>
+      <if test="s51 != null" >
+        #{s51,jdbcType=DOUBLE},
+      </if>
+      <if test="s32 != null" >
+        #{s32,jdbcType=DOUBLE},
+      </if>
+      <if test="s42 != null" >
+        #{s42,jdbcType=DOUBLE},
+      </if>
+      <if test="s52 != null" >
+        #{s52,jdbcType=DOUBLE},
+      </if>
+      <if test="sother != null" >
+        #{sother,jdbcType=DOUBLE},
+      </if>
+      <if test="ss != null" >
+        #{ss,jdbcType=DOUBLE},
+      </if>
+      <if test="sp != null" >
+        #{sp,jdbcType=DOUBLE},
+      </if>
+      <if test="sf != null" >
+        #{sf,jdbcType=DOUBLE},
+      </if>
+      <if test="ps != null" >
+        #{ps,jdbcType=DOUBLE},
+      </if>
+      <if test="pp != null" >
+        #{pp,jdbcType=DOUBLE},
+      </if>
+      <if test="pf != null" >
+        #{pf,jdbcType=DOUBLE},
+      </if>
+      <if test="fs != null" >
+        #{fs,jdbcType=DOUBLE},
+      </if>
+      <if test="fp != null" >
+        #{fp,jdbcType=DOUBLE},
+      </if>
+      <if test="ff != null" >
+        #{ff,jdbcType=DOUBLE},
+      </if>
+      <if test="sheng != null" >
+        #{sheng,jdbcType=DOUBLE},
+      </if>
+      <if test="ping != null" >
+        #{ping,jdbcType=DOUBLE},
+      </if>
+      <if test="fu != null" >
+        #{fu,jdbcType=DOUBLE},
+      </if>
+      <if test="rqSheng != null" >
+        #{rqSheng,jdbcType=DOUBLE},
+      </if>
+      <if test="rqPing != null" >
+        #{rqPing,jdbcType=DOUBLE},
+      </if>
+      <if test="rqFu != null" >
+        #{rqFu,jdbcType=DOUBLE},
+      </if>
+      <if test="t0 != null" >
+        #{t0,jdbcType=DOUBLE},
+      </if>
+      <if test="t1 != null" >
+        #{t1,jdbcType=DOUBLE},
+      </if>
+      <if test="t2 != null" >
+        #{t2,jdbcType=DOUBLE},
+      </if>
+      <if test="t3 != null" >
+        #{t3,jdbcType=DOUBLE},
+      </if>
+      <if test="t4 != null" >
+        #{t4,jdbcType=DOUBLE},
+      </if>
+      <if test="t5 != null" >
+        #{t5,jdbcType=DOUBLE},
+      </if>
+      <if test="t6 != null" >
+        #{t6,jdbcType=DOUBLE},
+      </if>
+      <if test="t7 != null" >
+        #{t7,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.chengbin.crawler.entity.FootballSp" >
+    update football_sp
+    <set >
+      <if test="matchId != null" >
+        match_id = #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null" >
+        issue = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="f01 != null" >
+        f01 = #{f01,jdbcType=DOUBLE},
+      </if>
+      <if test="f02 != null" >
+        f02 = #{f02,jdbcType=DOUBLE},
+      </if>
+      <if test="f03 != null" >
+        f03 = #{f03,jdbcType=DOUBLE},
+      </if>
+      <if test="f04 != null" >
+        f04 = #{f04,jdbcType=DOUBLE},
+      </if>
+      <if test="f05 != null" >
+        f05 = #{f05,jdbcType=DOUBLE},
+      </if>
+      <if test="f12 != null" >
+        f12 = #{f12,jdbcType=DOUBLE},
+      </if>
+      <if test="f13 != null" >
+        f13 = #{f13,jdbcType=DOUBLE},
+      </if>
+      <if test="f14 != null" >
+        f14 = #{f14,jdbcType=DOUBLE},
+      </if>
+      <if test="f15 != null" >
+        f15 = #{f15,jdbcType=DOUBLE},
+      </if>
+      <if test="f23 != null" >
+        f23 = #{f23,jdbcType=DOUBLE},
+      </if>
+      <if test="f24 != null" >
+        f24 = #{f24,jdbcType=DOUBLE},
+      </if>
+      <if test="f25 != null" >
+        f25 = #{f25,jdbcType=DOUBLE},
+      </if>
+      <if test="fother != null" >
+        fother = #{fother,jdbcType=DOUBLE},
+      </if>
+      <if test="p00 != null" >
+        p00 = #{p00,jdbcType=DOUBLE},
+      </if>
+      <if test="p11 != null" >
+        p11 = #{p11,jdbcType=DOUBLE},
+      </if>
+      <if test="p22 != null" >
+        p22 = #{p22,jdbcType=DOUBLE},
+      </if>
+      <if test="p33 != null" >
+        p33 = #{p33,jdbcType=DOUBLE},
+      </if>
+      <if test="pother != null" >
+        pother = #{pother,jdbcType=DOUBLE},
+      </if>
+      <if test="s10 != null" >
+        s10 = #{s10,jdbcType=DOUBLE},
+      </if>
+      <if test="s20 != null" >
+        s20 = #{s20,jdbcType=DOUBLE},
+      </if>
+      <if test="s30 != null" >
+        s30 = #{s30,jdbcType=DOUBLE},
+      </if>
+      <if test="s40 != null" >
+        s40 = #{s40,jdbcType=DOUBLE},
+      </if>
+      <if test="s50 != null" >
+        s50 = #{s50,jdbcType=DOUBLE},
+      </if>
+      <if test="s21 != null" >
+        s21 = #{s21,jdbcType=DOUBLE},
+      </if>
+      <if test="s31 != null" >
+        s31 = #{s31,jdbcType=DOUBLE},
+      </if>
+      <if test="s41 != null" >
+        s41 = #{s41,jdbcType=DOUBLE},
+      </if>
+      <if test="s51 != null" >
+        s51 = #{s51,jdbcType=DOUBLE},
+      </if>
+      <if test="s32 != null" >
+        s32 = #{s32,jdbcType=DOUBLE},
+      </if>
+      <if test="s42 != null" >
+        s42 = #{s42,jdbcType=DOUBLE},
+      </if>
+      <if test="s52 != null" >
+        s52 = #{s52,jdbcType=DOUBLE},
+      </if>
+      <if test="sother != null" >
+        sother = #{sother,jdbcType=DOUBLE},
+      </if>
+      <if test="ss != null" >
+        ss = #{ss,jdbcType=DOUBLE},
+      </if>
+      <if test="sp != null" >
+        sp = #{sp,jdbcType=DOUBLE},
+      </if>
+      <if test="sf != null" >
+        sf = #{sf,jdbcType=DOUBLE},
+      </if>
+      <if test="ps != null" >
+        ps = #{ps,jdbcType=DOUBLE},
+      </if>
+      <if test="pp != null" >
+        pp = #{pp,jdbcType=DOUBLE},
+      </if>
+      <if test="pf != null" >
+        pf = #{pf,jdbcType=DOUBLE},
+      </if>
+      <if test="fs != null" >
+        fs = #{fs,jdbcType=DOUBLE},
+      </if>
+      <if test="fp != null" >
+        fp = #{fp,jdbcType=DOUBLE},
+      </if>
+      <if test="ff != null" >
+        ff = #{ff,jdbcType=DOUBLE},
+      </if>
+      <if test="sheng != null" >
+        sheng = #{sheng,jdbcType=DOUBLE},
+      </if>
+      <if test="ping != null" >
+        ping = #{ping,jdbcType=DOUBLE},
+      </if>
+      <if test="fu != null" >
+        fu = #{fu,jdbcType=DOUBLE},
+      </if>
+      <if test="rqSheng != null" >
+        rq_sheng = #{rqSheng,jdbcType=DOUBLE},
+      </if>
+      <if test="rqPing != null" >
+        rq_ping = #{rqPing,jdbcType=DOUBLE},
+      </if>
+      <if test="rqFu != null" >
+        rq_fu = #{rqFu,jdbcType=DOUBLE},
+      </if>
+      <if test="t0 != null" >
+        t0 = #{t0,jdbcType=DOUBLE},
+      </if>
+      <if test="t1 != null" >
+        t1 = #{t1,jdbcType=DOUBLE},
+      </if>
+      <if test="t2 != null" >
+        t2 = #{t2,jdbcType=DOUBLE},
+      </if>
+      <if test="t3 != null" >
+        t3 = #{t3,jdbcType=DOUBLE},
+      </if>
+      <if test="t4 != null" >
+        t4 = #{t4,jdbcType=DOUBLE},
+      </if>
+      <if test="t5 != null" >
+        t5 = #{t5,jdbcType=DOUBLE},
+      </if>
+      <if test="t6 != null" >
+        t6 = #{t6,jdbcType=DOUBLE},
+      </if>
+      <if test="t7 != null" >
+        t7 = #{t7,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.chengbin.crawler.entity.FootballSp" >
+    update football_sp
+    set match_id = #{matchId,jdbcType=VARCHAR},
+      issue = #{issue,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=INTEGER},
+      number = #{number,jdbcType=VARCHAR},
+      f01 = #{f01,jdbcType=DOUBLE},
+      f02 = #{f02,jdbcType=DOUBLE},
+      f03 = #{f03,jdbcType=DOUBLE},
+      f04 = #{f04,jdbcType=DOUBLE},
+      f05 = #{f05,jdbcType=DOUBLE},
+      f12 = #{f12,jdbcType=DOUBLE},
+      f13 = #{f13,jdbcType=DOUBLE},
+      f14 = #{f14,jdbcType=DOUBLE},
+      f15 = #{f15,jdbcType=DOUBLE},
+      f23 = #{f23,jdbcType=DOUBLE},
+      f24 = #{f24,jdbcType=DOUBLE},
+      f25 = #{f25,jdbcType=DOUBLE},
+      fother = #{fother,jdbcType=DOUBLE},
+      p00 = #{p00,jdbcType=DOUBLE},
+      p11 = #{p11,jdbcType=DOUBLE},
+      p22 = #{p22,jdbcType=DOUBLE},
+      p33 = #{p33,jdbcType=DOUBLE},
+      pother = #{pother,jdbcType=DOUBLE},
+      s10 = #{s10,jdbcType=DOUBLE},
+      s20 = #{s20,jdbcType=DOUBLE},
+      s30 = #{s30,jdbcType=DOUBLE},
+      s40 = #{s40,jdbcType=DOUBLE},
+      s50 = #{s50,jdbcType=DOUBLE},
+      s21 = #{s21,jdbcType=DOUBLE},
+      s31 = #{s31,jdbcType=DOUBLE},
+      s41 = #{s41,jdbcType=DOUBLE},
+      s51 = #{s51,jdbcType=DOUBLE},
+      s32 = #{s32,jdbcType=DOUBLE},
+      s42 = #{s42,jdbcType=DOUBLE},
+      s52 = #{s52,jdbcType=DOUBLE},
+      sother = #{sother,jdbcType=DOUBLE},
+      ss = #{ss,jdbcType=DOUBLE},
+      sp = #{sp,jdbcType=DOUBLE},
+      sf = #{sf,jdbcType=DOUBLE},
+      ps = #{ps,jdbcType=DOUBLE},
+      pp = #{pp,jdbcType=DOUBLE},
+      pf = #{pf,jdbcType=DOUBLE},
+      fs = #{fs,jdbcType=DOUBLE},
+      fp = #{fp,jdbcType=DOUBLE},
+      ff = #{ff,jdbcType=DOUBLE},
+      sheng = #{sheng,jdbcType=DOUBLE},
+      ping = #{ping,jdbcType=DOUBLE},
+      fu = #{fu,jdbcType=DOUBLE},
+      rq_sheng = #{rqSheng,jdbcType=DOUBLE},
+      rq_ping = #{rqPing,jdbcType=DOUBLE},
+      rq_fu = #{rqFu,jdbcType=DOUBLE},
+      t0 = #{t0,jdbcType=DOUBLE},
+      t1 = #{t1,jdbcType=DOUBLE},
+      t2 = #{t2,jdbcType=DOUBLE},
+      t3 = #{t3,jdbcType=DOUBLE},
+      t4 = #{t4,jdbcType=DOUBLE},
+      t5 = #{t5,jdbcType=DOUBLE},
+      t6 = #{t6,jdbcType=DOUBLE},
+      t7 = #{t7,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findByMatchId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from football_sp
+    where match_id = #{matchId,jdbcType=VARCHAR}
+  </select>
+</mapper>

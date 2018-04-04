@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.chengbin.crawler.mapper.LotteryMapper" >
+  <resultMap id="BaseResultMap" type="com.github.chengbin.crawler.entity.Lottery" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="max_sell_issue" property="maxSellIssue" jdbcType="INTEGER" />
+    <result column="limit_mul" property="limitMul" jdbcType="INTEGER" />
+    <result column="web_sell_status" property="webSellStatus" jdbcType="TINYINT" />
+    <result column="wap_sell_status" property="wapSellStatus" jdbcType="TINYINT" />
+    <result column="client_sell_status" property="clientSellStatus" jdbcType="TINYINT" />
+    <result column="order_value" property="orderValue" jdbcType="INTEGER" />
+    <result column="high_light" property="highLight" jdbcType="BIT" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="prize" property="prize" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, max_sell_issue, limit_mul, web_sell_status, wap_sell_status, client_sell_status, 
+    order_value, high_light, message, prize,create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    prize
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lottery
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.chengbin.crawler.entity.Lottery" >
+    insert into lottery (id, name, max_sell_issue, 
+      limit_mul, web_sell_status, wap_sell_status, 
+      client_sell_status, order_value, high_light, 
+      message, create_time, update_time, 
+      prize)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{maxSellIssue,jdbcType=INTEGER},
+      #{limitMul,jdbcType=INTEGER}, #{webSellStatus,jdbcType=TINYINT}, #{wapSellStatus,jdbcType=TINYINT}, 
+      #{clientSellStatus,jdbcType=TINYINT}, #{orderValue,jdbcType=INTEGER}, #{highLight,jdbcType=BIT}, 
+      #{message,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{prize,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.chengbin.crawler.entity.Lottery" >
+    insert into lottery
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="maxSellIssue != null" >
+        max_sell_issue,
+      </if>
+      <if test="limitMul != null" >
+        limit_mul,
+      </if>
+      <if test="webSellStatus != null" >
+        web_sell_status,
+      </if>
+      <if test="wapSellStatus != null" >
+        wap_sell_status,
+      </if>
+      <if test="clientSellStatus != null" >
+        client_sell_status,
+      </if>
+      <if test="orderValue != null" >
+        order_value,
+      </if>
+      <if test="highLight != null" >
+        high_light,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="prize != null" >
+        prize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSellIssue != null" >
+        #{maxSellIssue,jdbcType=INTEGER},
+      </if>
+      <if test="limitMul != null" >
+        #{limitMul,jdbcType=INTEGER},
+      </if>
+      <if test="webSellStatus != null" >
+        #{webSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="wapSellStatus != null" >
+        #{wapSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="clientSellStatus != null" >
+        #{clientSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderValue != null" >
+        #{orderValue,jdbcType=INTEGER},
+      </if>
+      <if test="highLight != null" >
+        #{highLight,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prize != null" >
+        #{prize,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.chengbin.crawler.entity.Lottery" >
+    update lottery
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSellIssue != null" >
+        max_sell_issue = #{maxSellIssue,jdbcType=INTEGER},
+      </if>
+      <if test="limitMul != null" >
+        limit_mul = #{limitMul,jdbcType=INTEGER},
+      </if>
+      <if test="webSellStatus != null" >
+        web_sell_status = #{webSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="wapSellStatus != null" >
+        wap_sell_status = #{wapSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="clientSellStatus != null" >
+        client_sell_status = #{clientSellStatus,jdbcType=TINYINT},
+      </if>
+      <if test="orderValue != null" >
+        order_value = #{orderValue,jdbcType=INTEGER},
+      </if>
+      <if test="highLight != null" >
+        high_light = #{highLight,jdbcType=BIT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prize != null" >
+        prize = #{prize,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.chengbin.crawler.entity.Lottery" >
+    update lottery
+    set name = #{name,jdbcType=VARCHAR},
+      max_sell_issue = #{maxSellIssue,jdbcType=INTEGER},
+      limit_mul = #{limitMul,jdbcType=INTEGER},
+      web_sell_status = #{webSellStatus,jdbcType=TINYINT},
+      wap_sell_status = #{wapSellStatus,jdbcType=TINYINT},
+      client_sell_status = #{clientSellStatus,jdbcType=TINYINT},
+      order_value = #{orderValue,jdbcType=INTEGER},
+      high_light = #{highLight,jdbcType=BIT},
+      message = #{message,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

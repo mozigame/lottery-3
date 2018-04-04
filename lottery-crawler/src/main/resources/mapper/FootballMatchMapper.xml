@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.chengbin.crawler.mapper.FootballMatchMapper" >
+  <resultMap id="BaseResultMap" type="com.github.chengbin.crawler.entity.FootballMatch" >
+    <id column="match_id" property="matchId" jdbcType="VARCHAR" />
+    <result column="jcw_id" property="jcwId" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="issue" property="issue" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="weekday" property="weekday" jdbcType="TINYINT" />
+    <result column="home_team_id" property="homeTeamId" jdbcType="INTEGER" />
+    <result column="home_team_name" property="homeTeamName" jdbcType="VARCHAR" />
+    <result column="guest_team_id" property="guestTeamId" jdbcType="INTEGER" />
+    <result column="guest_team_name" property="guestTeamName" jdbcType="VARCHAR" />
+    <result column="league" property="league" jdbcType="VARCHAR" />
+    <result column="match_time" property="matchTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="half_score" property="halfScore" jdbcType="VARCHAR" />
+    <result column="last_score" property="lastScore" jdbcType="VARCHAR" />
+    <result column="spf_single_status" property="spfSingleStatus" jdbcType="TINYINT" />
+    <result column="spf_pass_status" property="spfPassStatus" jdbcType="TINYINT" />
+    <result column="rqspf_single_status" property="rqspfSingleStatus" jdbcType="TINYINT" />
+    <result column="rqspf_pass_status" property="rqspfPassStatus" jdbcType="TINYINT" />
+    <result column="bqc_single_status" property="bqcSingleStatus" jdbcType="TINYINT" />
+    <result column="bqc_pass_status" property="bqcPassStatus" jdbcType="TINYINT" />
+    <result column="zjq_single_status" property="zjqSingleStatus" jdbcType="TINYINT" />
+    <result column="zjq_pass_status" property="zjqPassStatus" jdbcType="TINYINT" />
+    <result column="bf_single_status" property="bfSingleStatus" jdbcType="TINYINT" />
+    <result column="bf_pass_status" property="bfPassStatus" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="ihot" property="ihot" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    match_id, jcw_id, color, issue, number,weekday, home_team_id, home_team_name, guest_team_id,
+    guest_team_name, league, match_time, end_time, half_score, last_score, spf_single_status,
+    spf_pass_status, rqspf_single_status, rqspf_pass_status, bqc_single_status, bqc_pass_status, 
+    zjq_single_status, zjq_pass_status, bf_single_status, bf_pass_status, status, state,ihot,
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from football_match
+    where match_id = #{matchId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from football_match
+    where match_id = #{matchId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.github.chengbin.crawler.entity.FootballMatch" >
+    insert into football_match (match_id, jcw_id, color, 
+      issue, number,weekday, home_team_id,
+      home_team_name, guest_team_id, guest_team_name, 
+      league, match_time, end_time, 
+      half_score, last_score,
+      spf_single_status, spf_pass_status, rqspf_single_status, 
+      rqspf_pass_status, bqc_single_status, bqc_pass_status, 
+      zjq_single_status, zjq_pass_status, bf_single_status, 
+      bf_pass_status, status, state, ihot,
+      create_time, update_time)
+    values (#{matchId,jdbcType=VARCHAR}, #{jcwId,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+      #{issue,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR},#{weekday,jdbcType=TINYINT}, #{homeTeamId,jdbcType=INTEGER},
+      #{homeTeamName,jdbcType=VARCHAR}, #{guestTeamId,jdbcType=INTEGER}, #{guestTeamName,jdbcType=VARCHAR}, 
+      #{league,jdbcType=VARCHAR}, #{matchTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{halfScore,jdbcType=VARCHAR}, #{lastScore,jdbcType=VARCHAR},
+      #{spfSingleStatus,jdbcType=TINYINT}, #{spfPassStatus,jdbcType=TINYINT}, #{rqspfSingleStatus,jdbcType=TINYINT}, 
+      #{rqspfPassStatus,jdbcType=TINYINT}, #{bqcSingleStatus,jdbcType=TINYINT}, #{bqcPassStatus,jdbcType=TINYINT}, 
+      #{zjqSingleStatus,jdbcType=TINYINT}, #{zjqPassStatus,jdbcType=TINYINT}, #{bfSingleStatus,jdbcType=TINYINT}, 
+      #{bfPassStatus,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{state,jdbcType=TINYINT},#{ihot,jdbcType=BIT},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.chengbin.crawler.entity.FootballMatch" >
+    insert into football_match
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="matchId != null" >
+        match_id,
+      </if>
+      <if test="jcwId != null" >
+        jcw_id,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="weekday != null" >
+        weekday,
+      </if>
+      <if test="homeTeamId != null" >
+        home_team_id,
+      </if>
+      <if test="homeTeamName != null" >
+        home_team_name,
+      </if>
+      <if test="guestTeamId != null" >
+        guest_team_id,
+      </if>
+      <if test="guestTeamName != null" >
+        guest_team_name,
+      </if>
+      <if test="league != null" >
+        league,
+      </if>
+      <if test="matchTime != null" >
+        match_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="halfScore != null" >
+        half_score,
+      </if>
+      <if test="lastScore != null" >
+        last_score,
+      </if>
+      <if test="spfSingleStatus != null" >
+        spf_single_status,
+      </if>
+      <if test="spfPassStatus != null" >
+        spf_pass_status,
+      </if>
+      <if test="rqspfSingleStatus != null" >
+        rqspf_single_status,
+      </if>
+      <if test="rqspfPassStatus != null" >
+        rqspf_pass_status,
+      </if>
+      <if test="bqcSingleStatus != null" >
+        bqc_single_status,
+      </if>
+      <if test="bqcPassStatus != null" >
+        bqc_pass_status,
+      </if>
+      <if test="zjqSingleStatus != null" >
+        zjq_single_status,
+      </if>
+      <if test="zjqPassStatus != null" >
+        zjq_pass_status,
+      </if>
+      <if test="bfSingleStatus != null" >
+        bf_single_status,
+      </if>
+      <if test="bfPassStatus != null" >
+        bf_pass_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="ihot != null" >
+        ihot,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="matchId != null" >
+        #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="jcwId != null" >
+        #{jcwId,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="weekday != null" >
+        #{weekday,jdbcType=TINYINT},
+      </if>
+      <if test="homeTeamId != null" >
+        #{homeTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="homeTeamName != null" >
+        #{homeTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeamId != null" >
+        #{guestTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="guestTeamName != null" >
+        #{guestTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="matchTime != null" >
+        #{matchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="halfScore != null" >
+        #{halfScore,jdbcType=VARCHAR},
+      </if>
+      <if test="lastScore != null" >
+        #{lastScore,jdbcType=VARCHAR},
+      </if>
+      <if test="spfSingleStatus != null" >
+        #{spfSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="spfPassStatus != null" >
+        #{spfPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rqspfSingleStatus != null" >
+        #{rqspfSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rqspfPassStatus != null" >
+        #{rqspfPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bqcSingleStatus != null" >
+        #{bqcSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bqcPassStatus != null" >
+        #{bqcPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="zjqSingleStatus != null" >
+        #{zjqSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="zjqPassStatus != null" >
+        #{zjqPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bfSingleStatus != null" >
+        #{bfSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bfPassStatus != null" >
+        #{bfPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="ihot != null" >
+        #{ihot,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.chengbin.crawler.entity.FootballMatch" >
+    update football_match
+    <set >
+      <if test="jcwId != null" >
+        jcw_id = #{jcwId,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="issue != null" >
+        issue = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="weekday != null" >
+        weekday = #{weekday,jdbcType=TINYINT},
+      </if>
+      <if test="homeTeamId != null" >
+        home_team_id = #{homeTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="homeTeamName != null" >
+        home_team_name = #{homeTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestTeamId != null" >
+        guest_team_id = #{guestTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="guestTeamName != null" >
+        guest_team_name = #{guestTeamName,jdbcType=VARCHAR},
+      </if>
+      <if test="league != null" >
+        league = #{league,jdbcType=VARCHAR},
+      </if>
+      <if test="matchTime != null" >
+        match_time = #{matchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="halfScore != null" >
+        half_score = #{halfScore,jdbcType=VARCHAR},
+      </if>
+      <if test="lastScore != null" >
+        last_score = #{lastScore,jdbcType=VARCHAR},
+      </if>
+      <if test="spfSingleStatus != null" >
+        spf_single_status = #{spfSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="spfPassStatus != null" >
+        spf_pass_status = #{spfPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rqspfSingleStatus != null" >
+        rqspf_single_status = #{rqspfSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="rqspfPassStatus != null" >
+        rqspf_pass_status = #{rqspfPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bqcSingleStatus != null" >
+        bqc_single_status = #{bqcSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bqcPassStatus != null" >
+        bqc_pass_status = #{bqcPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="zjqSingleStatus != null" >
+        zjq_single_status = #{zjqSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="zjqPassStatus != null" >
+        zjq_pass_status = #{zjqPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bfSingleStatus != null" >
+        bf_single_status = #{bfSingleStatus,jdbcType=TINYINT},
+      </if>
+      <if test="bfPassStatus != null" >
+        bf_pass_status = #{bfPassStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="ihot != null" >
+        ihot = #{ihot,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where match_id = #{matchId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.chengbin.crawler.entity.FootballMatch" >
+    update football_match
+    set jcw_id = #{jcwId,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      issue = #{issue,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      weekday = #{weekday,jdbcType=TINYINT},
+      home_team_id = #{homeTeamId,jdbcType=INTEGER},
+      home_team_name = #{homeTeamName,jdbcType=VARCHAR},
+      guest_team_id = #{guestTeamId,jdbcType=INTEGER},
+      guest_team_name = #{guestTeamName,jdbcType=VARCHAR},
+      league = #{league,jdbcType=VARCHAR},
+      match_time = #{matchTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      half_score = #{halfScore,jdbcType=VARCHAR},
+      last_score = #{lastScore,jdbcType=VARCHAR},
+      spf_single_status = #{spfSingleStatus,jdbcType=TINYINT},
+      spf_pass_status = #{spfPassStatus,jdbcType=TINYINT},
+      rqspf_single_status = #{rqspfSingleStatus,jdbcType=TINYINT},
+      rqspf_pass_status = #{rqspfPassStatus,jdbcType=TINYINT},
+      bqc_single_status = #{bqcSingleStatus,jdbcType=TINYINT},
+      bqc_pass_status = #{bqcPassStatus,jdbcType=TINYINT},
+      zjq_single_status = #{zjqSingleStatus,jdbcType=TINYINT},
+      zjq_pass_status = #{zjqPassStatus,jdbcType=TINYINT},
+      bf_single_status = #{bfSingleStatus,jdbcType=TINYINT},
+      bf_pass_status = #{bfPassStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      ihot = #{ihot,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where match_id = #{matchId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectMatchInfo" resultType="com.github.chengbin.core.vo.FootballMatchVO" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from football_match
+    where match_id IN
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+</mapper>

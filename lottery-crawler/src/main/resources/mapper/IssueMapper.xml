@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.chengbin.crawler.mapper.IssueMapper" >
+  <resultMap id="BaseResultMap" type="com.github.chengbin.crawler.entity.Issue" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lottery_id" property="lotteryId" jdbcType="INTEGER" />
+    <result column="issue" property="issue" jdbcType="VARCHAR" />
+    <result column="draw_number" property="drawNumber" jdbcType="VARCHAR" />
+    <result column="draw_time" property="drawTime" jdbcType="TIMESTAMP" />
+    <result column="sell" property="sell" jdbcType="TINYINT" />
+    <result column="sell_start_time" property="sellStartTime" jdbcType="TIMESTAMP" />
+    <result column="sell_end_time" property="sellEndTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, lottery_id, issue, draw_number, draw_time, sell, sell_start_time, sell_end_time, 
+    state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from issue
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from issue
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.chengbin.crawler.entity.Issue" >
+    insert into issue (id, lottery_id, issue, 
+      draw_number, draw_time, sell, 
+      sell_start_time, sell_end_time, state
+      )
+    values (#{id,jdbcType=INTEGER}, #{lotteryId,jdbcType=INTEGER}, #{issue,jdbcType=VARCHAR}, 
+      #{drawNumber,jdbcType=VARCHAR}, #{drawTime,jdbcType=TIMESTAMP}, #{sell,jdbcType=TINYINT}, 
+      #{sellStartTime,jdbcType=TIMESTAMP}, #{sellEndTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.chengbin.crawler.entity.Issue" >
+    insert into issue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lotteryId != null" >
+        lottery_id,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="drawNumber != null" >
+        draw_number,
+      </if>
+      <if test="drawTime != null" >
+        draw_time,
+      </if>
+      <if test="sell != null" >
+        sell,
+      </if>
+      <if test="sellStartTime != null" >
+        sell_start_time,
+      </if>
+      <if test="sellEndTime != null" >
+        sell_end_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lotteryId != null" >
+        #{lotteryId,jdbcType=INTEGER},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="drawNumber != null" >
+        #{drawNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="drawTime != null" >
+        #{drawTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sell != null" >
+        #{sell,jdbcType=TINYINT},
+      </if>
+      <if test="sellStartTime != null" >
+        #{sellStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellEndTime != null" >
+        #{sellEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.chengbin.crawler.entity.Issue" >
+    update issue
+    <set >
+      <if test="lotteryId != null" >
+        lottery_id = #{lotteryId,jdbcType=INTEGER},
+      </if>
+      <if test="issue != null" >
+        issue = #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="drawNumber != null" >
+        draw_number = #{drawNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="drawTime != null" >
+        draw_time = #{drawTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sell != null" >
+        sell = #{sell,jdbcType=TINYINT},
+      </if>
+      <if test="sellStartTime != null" >
+        sell_start_time = #{sellStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellEndTime != null" >
+        sell_end_time = #{sellEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.chengbin.crawler.entity.Issue" >
+    update issue
+    set lottery_id = #{lotteryId,jdbcType=INTEGER},
+      issue = #{issue,jdbcType=VARCHAR},
+      draw_number = #{drawNumber,jdbcType=VARCHAR},
+      draw_time = #{drawTime,jdbcType=TIMESTAMP},
+      sell = #{sell,jdbcType=TINYINT},
+      sell_start_time = #{sellStartTime,jdbcType=TIMESTAMP},
+      sell_end_time = #{sellEndTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findByLotteryAndIssue" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from issue
+    where 1=1
+    <if test="lotteryId != null" >
+      and lottery_id = #{lotteryId,jdbcType=INTEGER}
+    </if>
+    <if test="issue != null and issue != ''" >
+      and issue = #{issue,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

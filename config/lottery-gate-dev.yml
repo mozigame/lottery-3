@@ -1,0 +1,37 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@peer1:8081/eureka,http://root:123456@peer2:8082/eureka,http://root:123456@peer3:8083/eureka
+
+##timeout config
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数，默认10
+      maxQueueSize: 1000 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000
+zuul:
+  host:
+    max-per-route-connections: 2000
+    max-total-connections: 20000
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+  semaphore:
+    max-semaphores: 1000
+  sensitive-headers:
+  ignored-services: "*"
+  prefix: "api"
+  routes:
+    order:
+      path: /order/**
+      serviceId: lottery-order
+    auth:
+      path: /auth/**
+      serviceId: lottery-auth
+

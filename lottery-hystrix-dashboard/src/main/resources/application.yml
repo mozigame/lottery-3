@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: lottery-hystrix-dashboard
+server:
+  port: 8095
+  undertow:
+       worker-threads: 20
+       buffer-size: 512
+       io-threads: 2
+  compression:
+    enabled: true
+    mime-types: text/xml,text/css,text/plain,application/xml,application/json,application/javascript
+    min-response-size: 1024
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@peer1:8081/eureka,http://root:123456@peer2:8082/eureka,http://root:123456@peer3:8083/eureka
+

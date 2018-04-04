@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.github.chengbin.order.mapper.OrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.github.chengbin.order.entity.OrderDetail" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="issue_id" property="issueId" jdbcType="BIGINT" />
+    <result column="issue" property="issue" jdbcType="VARCHAR" />
+    <result column="multiple" property="multiple" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="buy_money" property="buyMoney" jdbcType="DECIMAL" />
+    <result column="prize" property="prize" jdbcType="DECIMAL" />
+    <result column="prize_add" property="prizeAdd" jdbcType="DECIMAL" />
+    <result column="prize_sub" property="prizeSub" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.github.chengbin.order.entity.OrderDetail" >
+    insert into order_detail (id, order_id, issue_id, 
+      issue, multiple, money, 
+      buy_money, prize, prize_add, 
+      prize_sub, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{issueId,jdbcType=BIGINT}, 
+      #{issue,jdbcType=VARCHAR}, #{multiple,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{buyMoney,jdbcType=DECIMAL}, #{prize,jdbcType=DECIMAL}, #{prizeAdd,jdbcType=DECIMAL}, 
+      #{prizeSub,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.chengbin.order.entity.OrderDetail" >
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="issueId != null" >
+        issue_id,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="multiple != null" >
+        multiple,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="buyMoney != null" >
+        buy_money,
+      </if>
+      <if test="prize != null" >
+        prize,
+      </if>
+      <if test="prizeAdd != null" >
+        prize_add,
+      </if>
+      <if test="prizeSub != null" >
+        prize_sub,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="issueId != null" >
+        #{issueId,jdbcType=BIGINT},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=VARCHAR},
+      </if>
+      <if test="multiple != null" >
+        #{multiple,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="buyMoney != null" >
+        #{buyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="prize != null" >
+        #{prize,jdbcType=DECIMAL},
+      </if>
+      <if test="prizeAdd != null" >
+        #{prizeAdd,jdbcType=DECIMAL},
+      </if>
+      <if test="prizeSub != null" >
+        #{prizeSub,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

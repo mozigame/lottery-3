@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: lottery-monitor
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 1437243814@qq.com     #接收通知的邮箱地址，逗号分隔
+          ignore-changes:           #需要忽略的状态改变通知，逗号分隔,例如不通知离线到上线的状态，则填写为OFFLINE:UP
+          from: ${spring.mail.username}  #邮件发送者
+          #邮件主题
+          subject: #{application.name} (#{application.id}) is #{to.status}
+          #邮件内容
+          text: #{application.name} (#{application.id})\nstatus changed from #{from.status} to #{to.status}
+      routes:
+        endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
+      turbine:
+        clusters: jscloud
+        location: turbine
+        enabled: true
+
+  mail:   #邮件通知配置
+    host: smtp.qq.com
+    username: 861343636@qq.com    #发送邮件的邮箱地址
+    password: xxxx
+    properties:
+      mail:
+        smtp:                     #添加邮件认证相关设置
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+server:
+  port: 8092
+  undertow:
+     worker-threads: 20
+     buffer-size: 512
+     io-threads: 2
+  compression:
+    enabled: true
+    mime-types: text/xml,text/css,text/plain,application/xml,application/json,application/javascript
+    min-response-size: 1024
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: root
+    password: 123456
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@peer1:8081/eureka,http://root:123456@peer2:8082/eureka,http://root:123456@peer3:8083/eureka
+  instance:
+    metadata-map:
+      user:
+        name: ${security.user.name}
+        password: ${security.user.password}
